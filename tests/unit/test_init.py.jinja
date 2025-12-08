@@ -1,0 +1,20 @@
+"""Test the main application entry point."""
+
+from {{project_name}} import main
+
+
+class TestMainFunction:
+    """Test cases for the main function."""
+
+    def test_main_executes_without_error(self, capsys) -> None:
+        """Test that main function runs successfully."""
+        main()
+
+        captured = capsys.readouterr()
+        assert "Hello from {{project_name}}!" in captured.out
+        assert "{{project_description}}" in captured.out
+
+    def test_main_returns_none(self) -> None:
+        """Test that main function returns None."""
+        result = main()
+        assert result is None
