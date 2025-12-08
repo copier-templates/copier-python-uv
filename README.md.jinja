@@ -1,0 +1,56 @@
+# {{project_name}}
+
+{{project_description}}
+
+Project scaffolded from `copier` template.
+
+## Installation
+
+Install dependencies:
+```bash
+make install
+```
+
+## Usage
+
+Run the application:
+```bash
+uv run python -m {{project_name}}
+```
+
+## Development
+
+{% if "pytest" in dev_deps %}
+### Running Tests
+```bash
+make test-unit
+```
+{% endif %}
+{% if "ruff" in dev_deps %}
+### Code Quality
+```bash
+make lint
+make format
+```
+{% endif %}
+
+## Project Structure
+```
+src/{{project_name}}/     # Main package
+{%- if "pytest" in dev_deps %}
+tests/unit/              # Unit tests
+{%- endif %}
+```
+
+## Notes
+
+This project was generated using the copier template. To refresh with upstream improvements later run:
+```bash
+copier update
+```
+Do not manually edit the `.copier-answers.yml` file (it is auto-maintained by Copier).
+
+To re-create this project non-interactively from the template in a new location you can prepare a data file with the needed keys and run:
+```bash
+copier copy --data-file path/to/data.yml /path/to/template /new/dest
+```
