@@ -1,15 +1,30 @@
-# Python Project Template
+<div align="center">
+
+[![tests](https://github.com/patryk-gpl/copier-python-uv/actions/workflows/test.yml/badge.svg)](https://github.com/patryk-gpl/copier-python-uv/actions)
+[![Python versions](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue)](https://python.org)
+[![uv](https://img.shields.io/badge/uv-enabled-blue)](https://docs.astral.sh/uv/)
+[![ruff](https://img.shields.io/badge/ruff-enabled-black)](https://docs.astral.sh/ruff/)
+[![copier](https://img.shields.io/badge/copier-template-orange)](https://copier.readthedocs.io/)
+[![License](https://img.shields.io/github/license/patryk-gpl/copier-python-uv)](LICENSE)
+
+# 🎯 Python Project Template
+
+
 
 This template provides a standardized Python project structure with sensible defaults, tailored to use in Python projects. It streamlines project setup and encourages best practices from the start.
 
-# Prerequisites
+</div>
+
+---
+
+## 📋 Prerequisites
 
 The following tools must be installed:
-- Python 3.9 or newer
+- Python 3.10 or newer
 - uv or pipx (if you want to install Copier in an isolated environment, accessible everywhere)
 - copier
 
-## Usage
+## 🚀 Usage
 
 1. **Install Copier** (if not already):
    ```bash
@@ -48,13 +63,13 @@ The following tools must be installed:
    git commit -m "feat: Bootstrap repository from template"
    ```
 
-### Answers Files Explained
+### 📦 Answers Files Explained
 | File | Purpose |
 |------|---------|
 | `.copier-answers.yml` | Auto-maintained answers file for future updates (never edit manually). Now explicitly generated because the template includes `.copier-answers.yml.jinja`. |
 | `samples/config-basic.yml` | Example data file passed with `--data-file` (excluded from rendered projects). |
 
-### Internal Template Artifacts Not Copied
+### ⚙️ Internal Template Artifacts Not Copied
 The template excludes helper folders (`samples/`, `my_tests/`) from generated projects via `_exclude` in `copier.yaml`. This keeps consumer projects clean.
 
 To create a new variant template from existing data file configuration:
@@ -63,29 +78,29 @@ copier copy --data-file /path/to/config-basic.yml /path/to/template /dest
 ```
 For advanced configuration (tasks, migrations, multiple templates) see the Copier docs sections: tasks, migrations, applying multiple templates.
 
-## Customization
+## ✏️ Customization
 
 You can edit the template files (`*.jinja`) to fit your team's standards. See [Copier documentation](https://copier.readthedocs.io/en/stable/) for advanced templating and options.
 
-## Testing the Template
+## 🧪 Testing the Template
 
 This template includes comprehensive validation tests to ensure generated projects meet expected standards.
 
-### Running Tests
+### ▶️ Running Tests
 
 ```bash
 # Run all validation tests
 make test
 ```
 
-### Test Performance
+### ⚡ Test Performance
 
 Tests use session-scoped fixtures for optimal performance:
 - **Session-scoped fixtures:** Generated projects created once per test session, reused across all test modules
 - **Module-scoped wrappers:** Clean test API with ~50% faster execution vs module scope alone
 - **All tests read-only:** No mutations to generated projects ensures fixture reuse is safe
 
-### Test Files
+### 📁 Test Files
 
 Test files are located in `my_tests/` folder.
 
@@ -97,6 +112,6 @@ Test files are located in `my_tests/` folder.
 
 See `my_tests/conftest.py` for fixture definitions.
 
-## References
+## 📚 References
 - [Copier Documentation](https://copier.readthedocs.io/en/stable/)
 - [pre-commit](https://pre-commit.com/)
