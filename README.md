@@ -112,6 +112,22 @@ Test files are located in `my_tests/` folder.
 
 See `my_tests/conftest.py` for fixture definitions.
 
-## 📚 References
-- [Copier Documentation](https://copier.readthedocs.io/en/stable/)
-- [pre-commit](https://pre-commit.com/)
+## 📚 Local Documentation
+
+Project-specific guides and workflows:
+
+| Topic | Location |
+|-------|----------|
+| CI/CD Pipeline | [docs/ci.md](docs/ci.md) |
+| Development Setup | [docs/development.md](docs/development.md) |
+| Template Architecture | [docs/architecture.md](docs/architecture.md) |
+
+## 🔗 External References
+
+For framework and tool documentation:
+
+- **Copier Framework**: [Copier Documentation](https://copier.readthedocs.io/en/stable/)
+- **Python Packaging**: [PEP 621 - pyproject.toml](https://peps.python.org/pep-0621/)
+- **UV Package Manager**: [UV Documentation](https://docs.astral.sh/uv/)
+- **Ruff Formatter**: [Ruff Documentation](https://docs.astral.sh/ruff/)
+- **Pre-commit Hooks**: [pre-commit Framework](https://pre-commit.com/)
