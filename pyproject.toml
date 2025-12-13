@@ -47,3 +47,7 @@ addopts = "--durations=5 --durations-min=0.0 --tb=short"
 filterwarnings = [
     "ignore:Dirty template changes included automatically:copier._vcs.DirtyLocalWarning",
 ]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
