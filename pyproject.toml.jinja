@@ -41,9 +41,10 @@ addopts = [
 [tool.coverage.run]
 source = ["src"]
 omit = ["*/tests/*"]
+
 {%- if "ruff" in dev_deps %}
 [tool.ruff]
-line-length = 88
+line-length = 120
 target-version = "py310"
 
 [tool.ruff.lint]
