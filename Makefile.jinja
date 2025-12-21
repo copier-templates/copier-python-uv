@@ -19,6 +19,11 @@ install: check ## Install project dependencies
 
 {% if "pytest" in dev_deps -%}
 test: ## Run all unit tests
+	@set -eu; \
+	if [[ ! -d ".venv" ]]; then \
+	  printf "ERROR: .venv not found — run 'make install' first\n" >&2; \
+	  exit 1; \
+	fi; \
 	@uv run pytest tests/unit/
 {% endif -%}
 
