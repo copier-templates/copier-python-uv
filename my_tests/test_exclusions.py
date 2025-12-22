@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+
 import pytest
 
 # Test data constants (defined in conftest for centralized management)
-EXCLUDED_DIRS = ["my_tests", "samples"]
+EXCLUDED_DIRS = [".github", ".git", ".vscode", ".chlog", ".pytest_cache", "docs", "my_tests", "samples"]
 EXCLUDED_FILES = ["copier.yaml"]
 
 
@@ -25,8 +26,7 @@ def test_excluded_directories_are_absent(generated_basic: Path, dirname: str):
     if p.exists():
         contents = list(p.iterdir())
         assert len(contents) == 0, (
-            f"Excluded directory {dirname} should be empty but contains: "
-            f"{[item.name for item in contents]}"
+            f"Excluded directory {dirname} should be empty but contains: {[item.name for item in contents]}"
         )
 
 

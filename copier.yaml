@@ -43,26 +43,15 @@ _envops:
 
 _exclude:
     - "copier.yaml"
-    - "copier.yml"
     - "my_tests"
-    - "my_tests/*"
+    - "docs"
     - "samples"
-    - "samples/*"
     - "pytest.ini"
     - ".git"
-    - ".git/*"
     - ".github"
-    - ".github/*"
     - ".vscode"
-    - ".vscode/*"
     - ".chlog"
-    - ".chlog/*"
     - ".pytest_cache"
-    - ".pytest_cache/*"
-    - "~*"
-    - "*.py[co]"
-    - "__pycache__"
     - ".DS_Store"
-    - ".svn"
 
 _tasks: []
