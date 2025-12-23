@@ -1,4 +1,4 @@
-.PHONY: help install clean{% if "pytest" in dev_deps %} test{% endif %}{% if "ruff" in dev_deps %} lint format format-check fix{% endif %}
+.PHONY: help install clean{% if "pytest" in dev_deps %} test{% endif %}
 
 help: ## Display available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -24,11 +24,11 @@ test: ## Run all unit tests
 	  printf "ERROR: .venv not found — run 'make install' first\n" >&2; \
 	  exit 1; \
 	fi; \
-	@uv run pytest tests/unit/
+	uv run pytest tests/unit/
 {% endif -%}
 
 clean: ## Clean build artifacts
 	@echo "Cleaning Python artifacts.."
-	@rm -rf build/ dist/ *.egg-info/ .pytest_cache/ htmlcov/ .coverage
+	@rm -rf build/ dist/ *.egg-info/ .pytest_cache/ .ruff_cache/ htmlcov/ .coverage
 	@find . -type d -name __pycache__ -exec rm -rf {} +
 	@find . -type f -name "*.pyc" -delete

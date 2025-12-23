@@ -52,6 +52,7 @@ _exclude:
     - ".vscode"
     - ".chlog"
     - ".pytest_cache"
+    - ".ruff_cache"
     - ".DS_Store"
 
 _tasks: []
