@@ -5,6 +5,10 @@ PYTHON ?= uv run
 
 .PHONY: help clean check install test
 
+CLEAN_ROOT_DIRS := build/ dist/ .pytest_cache .ruff_cache htmlcov .coverage
+CLEAN_DIRS := __pycache__ *.egg-info
+CLEAN_FILES := *.pyc
+
 help: ## Display available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
@@ -24,6 +28,7 @@ install: check ## Install development dependencies (copier, pytest)
 test: clean install ## Run internal template validation tests
 	@$(PYTHON) pytest -v my_tests $$EXTRA_PYTEST_ARGS || (echo "\nHint: run 'make install' first to install copier & pytest" >&2; exit 1)
 
-clean:
-	@rm -rf .{pytest_cache,ruff_cache}
-	@find . -type d -name "__pycache__" -exec rm -rf {} +
+clean: ## Clean build and cache artifacts
+	@rm -rf $(CLEAN_ROOT_DIRS)
+	@for dir in $(CLEAN_DIRS); do find . -type d -name "$$dir" -exec rm -rf {} +; done
+	@for file in $(CLEAN_FILES); do find . -type f -name "$$file" -delete; done
