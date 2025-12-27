@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+
 import pytest
 
-# Test data constants (defined in conftest for centralized management)
-# These are recreated per module, but pytest caches them so the overhead is minimal
+# Module-level constants: defined once per module load, not recreated per test
 EXPECTED_FILES = [
     ".copier-answers.yml",
     ".gitattributes",

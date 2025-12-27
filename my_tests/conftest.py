@@ -4,12 +4,13 @@ These tests are NOT copied into generated projects (excluded via _exclude).
 
 from __future__ import annotations
 
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 import pytest
 from copier import run_copy
 
+# Module-level constant: computed once at import time, not repeatedly during tests
 TEMPLATE_ROOT = Path(__file__).resolve().parents[1]
 
 # Base data and small helper to produce test data with overrides
@@ -71,3 +72,48 @@ def generated_basic(_session_basic_project: Path) -> Path:
 def generated_with_ruff(_session_with_ruff_project: Path) -> Path:
     """Generated project with Ruff (wraps session fixture for ~50% faster execution)."""
     return _session_with_ruff_project
+
+
+# License test data: used by unit tests in test_licenses.py
+LICENSE_TEST_CASES = [
+    {
+        "license_type": "mit",
+        "expected_headers": ["MIT License"],
+        "expected_patterns": ["Copyright (c) 2025", "Permission is hereby granted"],
+    },
+    {
+        "license_type": "apache-2.0",
+        "expected_headers": ["Apache License", "Version 2.0"],
+        "expected_patterns": ["Copyright 2025", "Licensed under the Apache License"],
+    },
+    {
+        "license_type": "gpl-2.0",
+        "expected_headers": ["GNU GENERAL PUBLIC LICENSE", "Version 2"],
+        "expected_patterns": ["Copyright (C) 2025", "free software"],
+    },
+    {
+        "license_type": "gpl-3.0",
+        "expected_headers": ["GNU GENERAL PUBLIC LICENSE", "Version 3"],
+        "expected_patterns": ["Copyright (C) 2025", "free software"],
+    },
+    {
+        "license_type": "lgpl-2.0",
+        "expected_headers": ["GNU LIBRARY GENERAL PUBLIC LICENSE", "Version 2"],
+        "expected_patterns": ["Copyright (C) 2025", "library is free software"],
+    },
+    {
+        "license_type": "lgpl-2.1",
+        "expected_headers": ["GNU LESSER GENERAL PUBLIC LICENSE", "Version 2.1"],
+        "expected_patterns": ["Copyright (C) 2025", "library is free software"],
+    },
+    {
+        "license_type": "lgpl-3.0",
+        "expected_headers": ["GNU LESSER GENERAL PUBLIC LICENSE", "Version 3"],
+        "expected_patterns": ["Copyright (C) 2025", "library is free software"],
+    },
+    {
+        "license_type": "mpl-2.0",
+        "expected_headers": ["Mozilla Public License Version 2.0"],
+        "expected_patterns": ["1. Definitions", "2. License Grants"],
+    },
+]
