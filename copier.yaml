@@ -34,6 +34,11 @@ dev_deps:
     help: "Enter development dependencies as a JSON array"
     default: ["pytest", "pytest-cov", "ruff"]
 
+include_license:
+    type: bool
+    help: "Include a LICENSE file in the project?"
+    default: false
+
 _templates_suffix: .jinja
 _envops:
     block_start_string: "{%"

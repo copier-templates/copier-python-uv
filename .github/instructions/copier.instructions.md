@@ -15,6 +15,9 @@ Quick reference for the `copier` project templating tool.
 - **Settings:** https://copier.readthedocs.io/en/stable/settings/
 - **FAQ:** https://copier.readthedocs.io/en/stable/faq/
 
+# LICENSE file
+- The type of LICENSEs supported can be found here: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#choosing-the-right-license
+
 ## Key Concepts
 - Use `copier copy` to generate projects from templates
 - Use `copier update` to sync existing projects with template changes
