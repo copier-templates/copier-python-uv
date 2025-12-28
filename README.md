@@ -125,8 +125,9 @@ Project-specific guides and workflows:
 
 For framework and tool documentation:
 
-- **Copier Framework**: [Copier Documentation](https://copier.readthedocs.io/en/stable/)
-- **Python Packaging**: [PEP 621 - pyproject.toml](https://peps.python.org/pep-0621/)
-- **UV Package Manager**: [UV Documentation](https://docs.astral.sh/uv/)
-- **Ruff Formatter**: [Ruff Documentation](https://docs.astral.sh/ruff/)
-- **Pre-commit Hooks**: [pre-commit Framework](https://pre-commit.com/)
+- Copier Framework: [Copier Documentation](https://copier.readthedocs.io/en/stable/)
+- Pre-commit Hooks: [pre-commit Framework](https://pre-commit.com/)
+- Python classifiers: [PyPI Classifiers](https://pypi.org/classifiers/)
+- Python Packaging: [PEP 621 - pyproject.toml](https://peps.python.org/pep-0621/)
+- Ruff Formatter: [Ruff Documentation](https://docs.astral.sh/ruff/)
+- UV Package Manager: [UV Documentation](https://docs.astral.sh/uv/)
