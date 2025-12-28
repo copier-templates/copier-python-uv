@@ -26,7 +26,7 @@ install: check ## Install development dependencies (copier, pytest)
 
 # Run internal validation tests, use environment variable EXTRA_PYTEST_ARGS to pass additional args.
 test: clean install ## Run internal template validation tests
-	@$(PYTHON) pytest -v my_tests $$EXTRA_PYTEST_ARGS || (echo "\nHint: run 'make install' first to install copier & pytest" >&2; exit 1)
+	@$(PYTHON) pytest my_tests $$EXTRA_PYTEST_ARGS || (echo "\nHint: run 'make install' first to install copier & pytest" >&2; exit 1)
 
 clean: ## Clean build and cache artifacts
 	@rm -rf $(CLEAN_ROOT_DIRS)

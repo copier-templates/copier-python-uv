@@ -14,8 +14,7 @@ check: ## Verify required tools are available
 		printf "ERROR: %s missing — install it\n" "$$cmd" >&2; \
 		exit 1; \
 	  fi; \
-	done; \
-	printf "Prerequisites OK\n"
+	done
 
 install: check ## Install project dependencies
 	@pre-commit install

@@ -1,8 +1,7 @@
 <div align="center">
 
 [![tests](https://github.com/patryk-gpl/copier-python-uv/actions/workflows/test.yml/badge.svg)](https://github.com/patryk-gpl/copier-python-uv/actions)
-[![Python versions](https://img.shields.io/badge/python-3.10%20|%203.11%20|%203.12%20|%203.13-blue)](https://python.org)
-[![uv](https://img.shields.io/badge/uv-enabled-blue)](https://docs.astral.sh/uv/)
+foll[![uv](https://img.shields.io/badge/uv-enabled-blue)](https://docs.astral.sh/uv/)
 [![ruff](https://img.shields.io/badge/ruff-enabled-black)](https://docs.astral.sh/ruff/)
 [![copier](https://img.shields.io/badge/copier-template-orange)](https://copier.readthedocs.io/)
 [![License](https://img.shields.io/github/license/patryk-gpl/copier-python-uv)](LICENSE)
@@ -44,16 +43,16 @@ The following tools must be installed:
    Replace `/path/to/copier-template` with the path to this template, and `/path/to/your-repo` with your target repository.
 
 3. **Generate non-interactively using the provided sample data file:**
-   A sample data file is provided at `samples/answers-basic.yml`.
+   A sample data file is provided at `examples/config-basic.yml`.
    ```bash
-   copier copy --data-file samples/answers-basic.yml /path/to/copier-template /path/to/your-repo
+   copier copy --data-file examples/config-basic.yml /path/to/copier-template /path/to/your-repo
    ```
    You can duplicate and modify that file to create variants (e.g., `data-with-ruff.yml`).
 
 4. **(Optional) Override specific values at the CLI:**
    You can still override one or more answers on the fly:
    ```bash
-   copier copy --data-file samples/answers-basic.yml -d project_name=override_name /path/to/template /dest
+   copier copy --data-file examples/config-basic.yml -d project_name=override_name /path/to/template /dest
    ```
 
 5. **Review and commit the generated files:**
@@ -67,10 +66,10 @@ The following tools must be installed:
 | File | Purpose |
 |------|---------|
 | `.copier-answers.yml` | Auto-maintained answers file for future updates (never edit manually). Now explicitly generated because the template includes `.copier-answers.yml.jinja`. |
-| `samples/config-basic.yml` | Example data file passed with `--data-file` (excluded from rendered projects). |
+| `examples/config-basic.yml` | Example data file passed with `--data-file` (excluded from rendered projects). |
 
 ### ⚙️ Internal Template Artifacts Not Copied
-The template excludes helper folders (`samples/`, `my_tests/`) from generated projects via `_exclude` in `copier.yaml`. This keeps consumer projects clean.
+The template excludes helper folders (`examples/`, `my_tests/`) from generated projects via `_exclude` in `copier.yaml`. This keeps consumer projects clean.
 
 To create a new variant template from existing data file configuration:
 ```bash

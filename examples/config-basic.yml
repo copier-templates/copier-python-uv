@@ -1,7 +1,7 @@
 # Example data file for non-interactive Copier usage
 # Provide to Copier with --data-file to pre-answer questions (do NOT use -a here)
 # Usage:
-#   copier copy --data-file samples/config-basic.yml /path/to/template /dest/path
+#   copier copy --data-file examples/config-basic.yml /path/to/template /dest/path
 # Only include question keys (no leading underscore settings). You can override
 # any value inline with -d key=value flags if needed.
 

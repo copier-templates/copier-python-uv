@@ -12,7 +12,6 @@ The template is built using [Copier](https://copier.readthedocs.io/), a project 
 
 The main template configuration file that defines:
 - **Questions**: Interactive prompts for template variables
-- **Conditional Files**: Using `_if_` prefix for dynamic file inclusion
 - **Exclusions**: Files/directories not copied to generated projects via `_exclude`
 - **Jinja Extensions**: Custom Jinja filters and extensions
 - **Tasks**: Post-generation operations (migrations, setup scripts)
@@ -33,7 +32,7 @@ The main template configuration file that defines:
 ├── .copier-answers.yml.jinja    # Answers tracking (templated)
 ├── {{ _copier_conf.answers_file }}.jinja  # Answers file configuration
 │
-├── samples/                     # Example data files (EXCLUDED)
+├── examples/                    # Example data files (EXCLUDED)
 │   └── config-basic.yml         # Sample answers file
 ├── my_tests/                    # Test suite (EXCLUDED)
 │   ├── conftest.py
@@ -48,7 +47,7 @@ The main template configuration file that defines:
 
 Files in these directories are **NOT** copied to generated projects:
 
-- `samples/` - Example configuration and data files
+- `examples/` - Example configuration and data files
 - `my_tests/` - Template validation tests
 - `.git/` - Git metadata (Copier default)
 - `__pycache__/` - Python cache (Copier default)
@@ -69,13 +68,21 @@ Python: {{ python_version }}
 
 ### Conditional Sections
 
-Use `_if_` prefix to conditionally include files:
+Make files and directories conditional by templating their names with Jinja expressions. For example, generate a file only when `use_precommit` is true:
 
 ```
-file_name_if_condition.py.jinja
+{% if use_precommit %}.pre-commit-config.yaml{% endif %}.jinja
 ```
 
-This file is only included when the condition evaluates to `true`.
+Important: keep the template suffix (by default `.jinja`) outside the Jinja expression. If the suffix is inside the condition the file won't be treated as a template and will be copied verbatim.
+
+Concrete example:
+
+```
+{% if enable_feature %}optional_feature.py{% endif %}.jinja
+```
+
+See `my_tests/test_conditional_sections.py` for expected behavior and the official Copier docs ("Conditional files and directories") for more details.
 
 ### File Extensions
 
@@ -127,7 +134,7 @@ Auto-maintained file created in generated projects. Used for:
 
 ### Sample Configuration
 
-`samples/config-basic.yml` provides:
+`examples/config-basic.yml` provides:
 - Example variable values
 - Used with `copier copy --data-file` for non-interactive generation
 - Excluded from generated projects
@@ -161,16 +168,6 @@ Auto-maintained file created in generated projects. Used for:
 
 3. Add test case in `my_tests/`
 
-### Create a Conditional File
-
-1. Rename file with `_if_` prefix:
-   ```
-   optional_file_if_include_feature.py.jinja
-   ```
-
-2. Define condition in `copier.yaml`
-
-3. Add test to `test_conditional_sections.py`
 
 ### Update Generated Projects
 

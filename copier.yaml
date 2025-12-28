@@ -65,7 +65,7 @@ _exclude:
     - "copier.yaml"
     - "my_tests"
     - "docs"
-    - "samples"
+    - "examples"
     - "pytest.ini"
     - ".git"
     - ".github"

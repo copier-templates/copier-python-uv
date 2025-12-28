@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 # Module-level constants: defined once per module load, not recreated per test
-EXCLUDED_DIRS = [".github", ".git", ".vscode", ".chlog", ".pytest_cache", "docs", "my_tests", "samples"]
+EXCLUDED_DIRS = [".github", ".git", ".vscode", ".chlog", ".pytest_cache", "docs", "my_tests", "examples"]
 EXCLUDED_FILES = ["copier.yaml"]
 
 
