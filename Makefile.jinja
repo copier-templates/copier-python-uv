@@ -7,21 +7,28 @@ CLEAN_FILES := *.pyc
 help: ## Display available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-check: ## Verify required tools are available
+check: ## Verify required tools and Git repository
 	@set -eu; \
+	if ! git rev-parse --git-dir >/dev/null 2>&1; then \
+	  printf "ERROR: Not a Git repository — run 'git init' first\n" >&2; \
+	  exit 1; \
+	fi
 	for cmd in uv pre-commit; do \
 	  if ! command -v "$$cmd" >/dev/null 2>&1; then \
 		printf "ERROR: %s missing — install it\n" "$$cmd" >&2; \
 		exit 1; \
 	  fi; \
-	done
+	done; \
 
 install: check ## Install project dependencies
-	@pre-commit install
-	@uv sync --extra dev
+	@printf "Installing pre-commit hooks...\n"
+	@pre-commit install || { printf "ERROR: pre-commit installation failed\n" >&2; exit 1; }
+	@printf "Installing project dependencies...\n"
+	@uv sync --extra dev || { printf "ERROR: uv sync failed\n" >&2; exit 1; }
+	@printf "\u2713 Installation complete\n"
 
 {% if "pytest" in dev_deps -%}
-test: ## Run all unit tests
+test: check ## Run all unit tests
 	@set -eu; \
 	if [[ ! -d ".venv" ]]; then \
 	  printf "ERROR: .venv not found — run 'make install' first\n" >&2; \
