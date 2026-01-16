@@ -1,7 +1,7 @@
 <div align="center">
 
 [![tests](https://github.com/patryk-gpl/copier-python-uv/actions/workflows/test.yml/badge.svg)](https://github.com/patryk-gpl/copier-python-uv/actions)
-foll[![uv](https://img.shields.io/badge/uv-enabled-blue)](https://docs.astral.sh/uv/)
+[![uv](https://img.shields.io/badge/uv-enabled-blue)](https://docs.astral.sh/uv/)
 [![ruff](https://img.shields.io/badge/ruff-enabled-black)](https://docs.astral.sh/ruff/)
 [![copier](https://img.shields.io/badge/copier-template-orange)](https://copier.readthedocs.io/)
 [![License](https://img.shields.io/github/license/patryk-gpl/copier-python-uv)](LICENSE)
