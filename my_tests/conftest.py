@@ -93,6 +93,42 @@ def generated_with_license(_session_with_license_project: Path) -> Path:
     return _session_with_license_project
 
 
+@pytest.fixture(scope="session")
+def _session_with_github_integration_project() -> Path:
+    """Session-scoped: generated project with GitHub integration enabled."""
+    data = _make_data(
+        {
+            "project_name": "github_proj",
+            "github_integration": True,
+        }
+    )
+    return _run_copy(data, dst_name="github")
+
+
+@pytest.fixture(scope="module")
+def generated_with_github_integration(_session_with_github_integration_project: Path) -> Path:
+    """Generated project with GitHub integration (wraps session fixture for ~50% faster execution)."""
+    return _session_with_github_integration_project
+
+
+@pytest.fixture(scope="session")
+def _session_without_github_integration_project() -> Path:
+    """Session-scoped: generated project with GitHub integration disabled."""
+    data = _make_data(
+        {
+            "project_name": "no_github_proj",
+            "github_integration": False,
+        }
+    )
+    return _run_copy(data, dst_name="no_github")
+
+
+@pytest.fixture(scope="module")
+def generated_without_github_integration(_session_without_github_integration_project: Path) -> Path:
+    """Generated project without GitHub integration (wraps session fixture for ~50% faster execution)."""
+    return _session_without_github_integration_project
+
+
 # License test data: used by unit tests in test_licenses.py
 LICENSE_TEST_CASES = [
     {

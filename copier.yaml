@@ -54,6 +54,11 @@ license_type:
     default: mit
     when: "{{ include_license }}"
 
+github_integration:
+    type: bool
+    help: "Include GitHub integration templates (issue templates, workflow stubs)?"
+    default: true
+
 _templates_suffix: .jinja
 _envops:
     block_start_string: "{%"
@@ -68,7 +73,8 @@ _exclude:
     - "examples"
     - "pytest.ini"
     - ".git"
-    - ".github"
+    - ".github/instructions"
+    - ".github/copilot-instructions.md"
     - ".vscode"
     - ".chlog"
     - ".pytest_cache"
@@ -78,3 +84,4 @@ _exclude:
 
 _tasks:
     - "{% if not include_license %}rm -f LICENSE{% endif %}"
+    - "{% if not github_integration %}rm -rf .github{% endif %}"
