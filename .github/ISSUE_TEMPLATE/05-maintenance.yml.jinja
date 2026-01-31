@@ -1,0 +1,77 @@
+name: Maintenance Issue
+description: Dependency updates, tooling, or infrastructure improvements
+title: "[Maintenance]: "
+labels: ["maintenance", "dependencies"]
+type: feature_request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to track dependency updates, tooling improvements, CI/CD enhancements, or other maintenance tasks.
+
+  - type: dropdown
+    id: maintenance-type
+    attributes:
+      label: Maintenance type
+      description: What kind of update or improvement is this?
+      options:
+        - Dependency upgrade
+        - Python version support
+        - Copier version compatibility
+        - CI/CD improvement
+        - Test infrastructure
+        - Code quality tooling
+        - Documentation infrastructure
+        - Other
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What needs to be updated or improved?
+      placeholder: "Describe the maintenance task..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this important? What's the benefit?
+      placeholder: |
+        - Security: [reason]
+        - Performance: [reason]
+        - Compatibility: [reason]
+        - Best practices: [reason]
+      validations:
+        required: true
+
+  - type: input
+    id: affected-areas
+    attributes:
+      label: Affected areas
+      description: What parts of the project are affected?
+      placeholder: "e.g., pyproject.toml, .github/workflows, Makefile"
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: How will we know this is done? (optional)
+      placeholder: |
+        - [ ] Dependency updated to version X
+        - [ ] Tests pass on all Python versions
+        - [ ] CI/CD pipeline executes successfully
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I have checked for existing maintenance issues
+          required: true
+        - label: I have provided clear motivation
+          required: true

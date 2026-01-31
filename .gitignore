@@ -163,6 +163,18 @@ cython_debug/
 
 # All files starting with .
 .*
+# Exception: Include GitHub issue templates and workflows (Copier template to be copied to projects)
+!.github/
+!.github/workflows/
+!.github/workflows/**
+!.github/ISSUE_TEMPLATE/
+!.github/ISSUE_TEMPLATE/**
+# But exclude everything else in .github
+.github/**
+!.github/workflows/
+!.github/workflows/**
+!.github/ISSUE_TEMPLATE/
+!.github/ISSUE_TEMPLATE/**
 *.txt
 *.xlsx
 *.log
