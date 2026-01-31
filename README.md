@@ -42,6 +42,11 @@ The following tools must be installed:
    ```
    Replace `/path/to/copier-template` with the path to this template, and `/path/to/your-repo` with your target repository.
 
+   **Note:** If you're testing with unreleased template changes, use `--vcs-ref=HEAD`:
+   ```bash
+   copier copy --vcs-ref=HEAD /path/to/copier-template /path/to/your-repo
+   ```
+
 3. **Generate non-interactively using the provided sample data file:**
    A sample data file is provided at `examples/config-basic.yml`.
    ```bash
@@ -49,10 +54,15 @@ The following tools must be installed:
    ```
    You can duplicate and modify that file to create variants (e.g., `data-with-ruff.yml`).
 
+   **Note:** This template uses conditional tasks (see [Tasks Behavior](#-tasks-behavior-with-different-copier-commands)), which require the `--trust` flag:
+   ```bash
+   copier copy --trust --data-file examples/config-basic.yml /path/to/copier-template /path/to/your-repo
+   ```
+
 4. **(Optional) Override specific values at the CLI:**
    You can still override one or more answers on the fly:
    ```bash
-   copier copy --data-file examples/config-basic.yml -d project_name=override_name /path/to/template /dest
+   copier copy --trust --data-file examples/config-basic.yml -d project_name=override_name /path/to/template /dest
    ```
 
 5. **Review and commit the generated files:**
@@ -66,44 +76,80 @@ The following tools must be installed:
 
 This template uses **conditional tasks** to manage optional features (LICENSE file, GitHub integration). Understanding their behavior is important for safe updates:
 
+#### Task Execution Process
+Tasks always run at the end of both `copier copy` and `copier update` operations, **after** all files are generated. This means:
+- Files are created/updated first
+- Tasks execute based on your current answers
+- Any deletions from tasks are permanent for that operation
+
 #### Initial Project Generation (`copier copy`)
-Tasks execute **after** files are created:
-- `include_license=false` → `LICENSE` file is removed
-- `github_integration=false` → `.github/` directory (with issue templates and workflows) is removed
+When you generate a new project with conditions set:
+- ✅ `include_license=true` → LICENSE file is kept
+- ✅ `include_license=false` → `LICENSE` file is **removed** after generation
+- ✅ `github_integration=true` → `.github/` files (templates, workflows) are kept
+- ✅ `github_integration=false` → `.github/` directory is **removed** after generation
 
 #### Project Updates (`copier update`)
-**Tasks are executed again** during updates. This means:
-- ✅ Safe to run with `--defaults` (keeps your previous answers)
-- ⚠️ **Dangerous if you change boolean settings** (e.g., setting `github_integration=false`)
+**Tasks are executed again** during updates. This is important:
+- ✅ Safe with `--defaults` (keeps your previous answers as-is)
+- ✅ Safe if you keep boolean settings unchanged
+- ⚠️ **Dangerous if you change boolean settings** when you have customizations
 
-**Example problematic scenario:**
+#### Safe Update Commands
+
+**Recommended - Keeps all previous answers:**
 ```bash
-# Initial generation with github_integration=true
-copier copy --data-file config.yml /template /my-project
-
-# Later: modify workflows, add custom issues templates
-# Then update but accidentally change github_integration to false:
-copier update --data github_integration=false
-# Result: 🔴 rm -rf .github deletes ALL custom workflows and templates!
+copier update --defaults --trust  
+# Your github_integration and include_license settings remain unchanged
 ```
 
-#### Safe Update Practices
-1. **Keep boolean settings unchanged:**
+**Safe if no customizations in affected directories:**
+```bash
+copier update --trust --data github_integration=false
+# OK if you haven't customized .github/ subdirectories
+```
+
+#### Dangerous Update Scenario ⚠️
+
+```bash
+# Initial generation WITH GitHub integration
+copier copy --trust --vcs-ref=HEAD \
+  --data project_name=myproject \
+  --data github_integration=true \
+  /template /myproject
+
+# Later: You customize workflows in .github/workflows/
+
+# Then: Update but accidentally change github_integration to false
+copier update --trust --data github_integration=false
+# Result: 🔴 rm -rf .github DELETES ALL CUSTOM WORKFLOWS!
+```
+
+#### Safe Alternative for Disabling Features
+
+If you need to disable GitHub integration after customizing `.github/`:
+
+1. **Manually back up your customizations:**
    ```bash
-   # Good: Reuse all previous answers
-   copier update --defaults
+   cp -r .github/workflows /tmp/my-workflows-backup
+   cp LICENSE /tmp/my-license-backup  # if customized
    ```
 
-2. **Only change settings if there are no customizations in those directories:**
+2. **Run the update to disable features:**
    ```bash
-   # OK if .github/ hasn't been customized
-   copier update --data github_integration=false
+   copier update --trust --data github_integration=false
    ```
 
-3. **If you need to disable a feature with customizations:**
-   - Manually move/backup custom files from `.github/` or `LICENSE`
-   - Then run the update
-   - Restore your customizations afterward
+3. **Restore your customizations:**
+   ```bash
+   cp -r /tmp/my-workflows-backup /path/to/.github/workflows
+   ```
+
+4. **Commit your changes:**
+   ```bash
+   git add .github/
+   git commit -m "Restore custom workflows"
+   ```
 
 ### 📦 Answers Files Explained
 | File | Purpose |
