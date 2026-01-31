@@ -20,6 +20,7 @@ BASE_DATA: dict[str, object] = {
     "author_email": "test@test.com",
     "production_deps": ["requests"],
     "dev_deps": ["pytest", "pytest-cov"],
+    "github_integration": True,
 }
 
 
