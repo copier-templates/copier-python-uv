@@ -163,7 +163,10 @@ cython_debug/
 
 # All files starting with .
 .*
-# Exception: Include GitHub issue templates and workflows (Copier template to be copied to projects)
+# Exceptions: Include root-level dotfiles that are part of the template
+!.gitattributes
+!.gitignore
+!.pre-commit-config.yaml
 !.github/
 !.github/workflows/
 !.github/workflows/**
