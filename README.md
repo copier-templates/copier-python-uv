@@ -62,6 +62,49 @@ The following tools must be installed:
    git commit -m "feat: Bootstrap repository from template"
    ```
 
+### ⚠️ Tasks Behavior with Different Copier Commands
+
+This template uses **conditional tasks** to manage optional features (LICENSE file, GitHub integration). Understanding their behavior is important for safe updates:
+
+#### Initial Project Generation (`copier copy`)
+Tasks execute **after** files are created:
+- `include_license=false` → `LICENSE` file is removed
+- `github_integration=false` → `.github/` directory (with issue templates and workflows) is removed
+
+#### Project Updates (`copier update`)
+**Tasks are executed again** during updates. This means:
+- ✅ Safe to run with `--defaults` (keeps your previous answers)
+- ⚠️ **Dangerous if you change boolean settings** (e.g., setting `github_integration=false`)
+
+**Example problematic scenario:**
+```bash
+# Initial generation with github_integration=true
+copier copy --data-file config.yml /template /my-project
+
+# Later: modify workflows, add custom issues templates
+# Then update but accidentally change github_integration to false:
+copier update --data github_integration=false
+# Result: 🔴 rm -rf .github deletes ALL custom workflows and templates!
+```
+
+#### Safe Update Practices
+1. **Keep boolean settings unchanged:**
+   ```bash
+   # Good: Reuse all previous answers
+   copier update --defaults
+   ```
+
+2. **Only change settings if there are no customizations in those directories:**
+   ```bash
+   # OK if .github/ hasn't been customized
+   copier update --data github_integration=false
+   ```
+
+3. **If you need to disable a feature with customizations:**
+   - Manually move/backup custom files from `.github/` or `LICENSE`
+   - Then run the update
+   - Restore your customizations afterward
+
 ### 📦 Answers Files Explained
 | File | Purpose |
 |------|---------|
