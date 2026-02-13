@@ -39,7 +39,7 @@ def test_expected_dir_exists(generated_basic: Path, dirname: str):
 
 
 def test_package_name_matches(generated_basic: Path):
-    # The package directory should exist under src
+    # The package directory should exist under src with underscores (converted from dashes)
     assert (generated_basic / "src" / "example_proj").is_dir()
 
 

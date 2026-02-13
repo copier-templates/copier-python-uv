@@ -2,9 +2,15 @@ project_name:
     type: str
     help: What is your project name?
     validator: >-
-        {% if not project_name.replace('_', '').replace('-', '_').isalnum() %}
-        Project name must be alphanumeric with underscores/dashes only
+        {% if '_' in project_name %}
+        Project name must use dashes (-), not underscores (_). Example: my-awesome-project
+        {% elif not project_name.replace('-', '').replace('_', '').isalnum() %}
+        Project name must be alphanumeric with dashes only
         {% endif %}
+
+package_name:
+    type: str
+    default: "{{ project_name.replace('-', '_') }}"
 
 project_description:
     type: str

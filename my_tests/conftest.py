@@ -46,7 +46,7 @@ def _run_copy(data: dict[str, object], dst_name: str = "_generated") -> Path:
 @pytest.fixture(scope="session")
 def _session_basic_project() -> Path:
     """Session-scoped: basic generated project (reused across all test modules)."""
-    data = _make_data({"project_name": "example_proj"})
+    data = _make_data({"project_name": "example-proj"})
     return _run_copy(data, dst_name="basic")
 
 
@@ -55,7 +55,7 @@ def _session_with_ruff_project() -> Path:
     """Session-scoped: generated project with Ruff (reused across all test modules)."""
     data = _make_data(
         {
-            "project_name": "ruff_proj",
+            "project_name": "ruff-proj",
             "production_deps": [],
             "dev_deps": ["pytest", "pytest-cov", "ruff"],
         }
@@ -80,7 +80,7 @@ def _session_with_license_project() -> Path:
     """Session-scoped: generated project with MIT license (reused across all test modules)."""
     data = _make_data(
         {
-            "project_name": "license_proj",
+            "project_name": "license-proj",
             "include_license": True,
             "license_type": "mit",
         }
