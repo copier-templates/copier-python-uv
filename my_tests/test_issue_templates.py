@@ -13,8 +13,7 @@ EXPECTED_TEMPLATES = [
     "02-feature.yml",
     "03-docs.yml",
     "04-discussion.yml",
-    "05-maintenance.yml",
-    "06-security.yml",
+    "05-security.yml",
 ]
 
 
@@ -119,8 +118,7 @@ def test_templates_include_labels(generated_basic: Path):
         "02-feature.yml": "feature",
         "03-docs.yml": "docs",
         "04-discussion.yml": "question",
-        "05-maintenance.yml": "maintenance",
-        "06-security.yml": ["security", "bug"],
+        "05-security.yml": ["security", "bug"],
     }
 
     for template_file, expected_labels in label_mapping.items():

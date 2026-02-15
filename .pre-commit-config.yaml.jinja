@@ -1,4 +1,3 @@
-# Jinja template
 repos:
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
   rev: 3.0.0
@@ -24,7 +23,7 @@ repos:
     args: [--markdown-linebreak-ext=md]
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.14.9
+  rev: v0.14.10
   hooks:
     # Run the linter with fixes.
     - id: ruff-check
@@ -32,3 +31,13 @@ repos:
       args: ["--fix"]
     - id: ruff-format
       types_or: [python, pyi]
+
+- repo: local
+  hooks:
+  - id: sync-issue-templates
+    name: Sync GitHub issue templates
+    entry: hooks/sync_issue_templates.sh
+    language: script
+    files: ^\.github/ISSUE_TEMPLATE/.*\.jinja$
+    pass_filenames: false
+    always_run: false
