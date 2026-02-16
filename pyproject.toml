@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "copier>=9.11.0",
+    "copier>=9.11.3",
 ]
 
 [project.urls]
