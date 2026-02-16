@@ -52,7 +52,7 @@ addopts = [
     "--durations-min=0.0",
     "--tb=short",
 {%- if "pytest-cov" in dev_deps %}
-    "--cov={{package_name}}",
+    "--cov={{_package_name}}",
     "--cov-report=html",
     "--cov-report=term-missing",
 {%- endif %}

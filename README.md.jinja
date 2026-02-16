@@ -15,7 +15,7 @@ make install
 
 Run the application:
 ```bash
-uv run python -m {{package_name}}
+uv run python -m {{_package_name}}
 ```
 
 ## Development
@@ -36,7 +36,7 @@ make format
 
 ## Project Structure
 ```
-src/{{package_name}}/     # Main package
+src/{{_package_name}}/     # Main package
 {%- if "pytest" in dev_deps %}
 tests/unit/              # Unit tests
 {%- endif %}

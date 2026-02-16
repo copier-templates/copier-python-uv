@@ -2,9 +2,9 @@
 
 These tests enforce:
 - project_name must use dashes (not allowed underscores)
-- package_name is derived from project_name with dashes converted to underscores
-- folder structure uses package_name (underscores)
-- all imports and references use package_name (underscores)
+- _package_name is derived from project_name with dashes converted to underscores
+- folder structure uses _package_name (underscores)
+- all imports and references use _package_name (underscores)
 """
 
 from __future__ import annotations
